@@ -9,98 +9,94 @@ TeacherIndex = [Pike.name, Currie.name, Green.name]
 
 
 def swap(event):
-    print("Swapping")
-    try:
-        # Column 1 value association
-        if Teacher1.selected_index == 0:
-            print("found pike")
-            t1 = Pike
-        if Teacher1.selected_index == 1:
-            print("found currie")
-            t1 = Currie
-        if Teacher1.selected_index == 2:
-            print("found green")
-            t1 = Green
-    except:
-        name1lbl.text == "Please Select a Teacher"
-        print("couldnt find a teacher")
-    try:
-        # Column 2 Value association
-        if Teacher2.selected_index == 0:
-            print("found pike") 
-            t2 = Pike
-        if Teacher2.selected_index == 1:
-            print("found currie")
-            t2 = Currie
-        if Teacher2.selected_index == 2:
-            print("found green")  
-            t2 = Green
-    except:
-        name2lbl.text == "Please Select a Teacher"
-        print("couldnt find a teacher")
+    success = 0
+    # Column 1 value association
+    if Teacher1.selected_index == 0:
+        t1 = Pike
+        success = success + 1
+    elif Teacher1.selected_index == 1:
+        t1 = Currie
+        success = success + 1
+    elif Teacher1.selected_index == 2:
+        t1 = Green
+        success = success + 1
+    # Column 2 Value association
+    if Teacher2.selected_index == 0:
+        t2 = Pike
+        success = success + 1
+    elif Teacher2.selected_index == 1:
+        t2 = Currie
+        success = success + 1
+    elif Teacher2.selected_index == 2:
+        t2 = Green
+        success = success + 1
     
-    # Swap the teacher data using a temporary variable
-    temp_day = t1.day
-    temp_duty = t1.duty
-    temp_time = t1.time
+    try:
+        # Swap the teacher data using a temporary variable
+        temp_day = t1.day
+        temp_duty = t1.duty
+        temp_time = t1.time
 
-    t1.day = t2.day
-    t1.duty = t2.duty
-    t1.time = t2.time
+        t1.day = t2.day
+        t1.duty = t2.duty
+        t1.time = t2.time
 
-    t2.day = temp_day
-    t2.duty = temp_duty
-    t2.time = temp_time
+        t2.day = temp_day
+        t2.duty = temp_duty
+        t2.time = temp_time
+        print("Successfully Swapped")
+    except:
+        name1lbl.text = "Please Select a Teacher"
+        name2lbl.text = "Please Select a Teacher"
+        print(f"Swapping Failed Because Only {success} Teacher/s Was Selected")
 
-    load(event)
+    load(event=event)
 
 def load(event):
-    # Column 1
+    success = 0
     try:
+        # Column 1
         if Teacher1.selected_index == 0:
-            print("found pike")
             name1lbl.text = "Name: " + Pike.name
             Time1lbl.text = "Time: " + Pike.time
             Day1lbl.text = "Day: " + Pike.day
             Duty1lbl.text = "Duty: " + Pike.duty
+            success = success + 1
         elif Teacher1.selected_index == 1:
-            print("found currie")
             name1lbl.text = "Name: " + Currie.name
             Time1lbl.text = "Time: " + Currie.time
             Day1lbl.text = "Day: " + Currie.day
             Duty1lbl.text = "Duty: " + Currie.duty
+            success = success + 1
         elif Teacher1.selected_index == 2:
-            print("found green")
             name1lbl.text = "Name: " + Green.name
             Time1lbl.text = "Time: " + Green.time
             Day1lbl.text = "Day: " + Green.day
             Duty1lbl.text = "Duty: " + Green.duty
-    except:
-        name1lbl.text == "Error"
-    # Column 2
-    try: 
+            success = success + 1
+        # Column 2
         if Teacher2.selected_index == 0:
-            print("found pike")
             name2lbl.text = "Name: " + Pike.name
             Time2lbl.text = "Time: " + Pike.time
             Day2lbl.text = "Day: " + Pike.day
             Duty2lbl.text = "Duty: " + Pike.duty
+            success = success + 1
         elif Teacher2.selected_index == 1:
-            print("found currie")
             name2lbl.text = "Name: " + Currie.name
             Time2lbl.text = "Time: " + Currie.time
             Day2lbl.text = "Day: " + Currie.day
             Duty2lbl.text = "Duty: " + Currie.duty
+            success = success + 1
         elif Teacher2.selected_index == 2:
-            print("found green")
             name2lbl.text = "Name: " + Green.name
             Time2lbl.text = "Time: " + Green.time
             Day2lbl.text = "Day: " + Green.day
             Duty2lbl.text = "Duty: " + Green.duty
+            success = success + 1
+        print(f"Loaded {success} Teacher/s Successfully")
     except:
-        name2lbl.text == "Error"
+        print("Failed to load")
 
-    print("Loading")
 
 # App window settings
 app = gp.GooeyPieApp("Yard Duty")
